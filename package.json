@@ -12,15 +12,37 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
-    "husky": "^3.0.2"
+    "git-precommit-checks": "^2.3.1",
+    "husky": "^3.0.2",
+    "precise-commits": "^1.0.2"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
     ]
   },
+  "husky": {
     "hooks": {
-    "pre-commit": "git-precommit-checks && precise-commit",    
-    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-   }
+      "pre-commit": "git-precommit-checks && precise-commit",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "hooks": {
+    "pre-commit": [
+      {
+        "message": "You’ve got leftover conflict markers",
+        "regex": "/^[<>|=]{4,}/m"
+      },
+      {
+        "filter": "\\.js$",
+        "message": "You’ve got leftover `console.log`",
+        "regex": "console\\.log"
+      },
+      {
+        "message": "You have unfinished devs",
+        "nonBlocking": "true",
+        "regex": "(?:FIXME|TODO)"
+      }
+    ]
+  }
 }
