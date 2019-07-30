@@ -21,24 +21,6 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
     }
   },
-  "hooks": {
-    "pre-commit": [
-      {
-        "message": "You’ve got leftover conflict markers",
-        "regex": "/^[<>|=]{4,}/m"
-      },
-      {
-        "filter": "\\.js$",
-        "message": "You’ve got leftover `console.log`",
-        "regex": "console\\.log"
-      },
-      {
-        "message": "You have unfinished devs",
-        "nonBlocking": "true",
-        "regex": "(?:FIXME|TODO)"
-      }
-    ]
-  },
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
